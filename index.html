@@ -19,38 +19,60 @@
 }
 </script>
 <script type="text/babel" data-type="module">
-    import React from 'react';
-    import {createRoot} from 'react-dom/client'
+    import React, { useState, } from 'react';
+    import { createRoot } from 'react-dom/client'
 
     function App() {
-        // can only return one html element at a time
-        // that element can have as many children as you want
+        // const [varName, changeFunction] = useState(initialValue);
+        const [count, setCount] = useState(0);
+        // const example = useState("a");
+        // console.log(example);
+        // console.log(example[0]);
+        // console.log(example[1]);
+
+        function buttonClick() {
+            //count++
+            // count = count + 1
+            setCount(count+1);
+        }
 
         const paragraphs = [];
         for (let i=0; i<10; i++) {
-            paragraphs.push(<Paragraph/>);
+            paragraphs.push(<Paragraph key={i} paragraphName={i}/>);
         }
+        // can only return one html element at a time
+        // that element can have as many children as you want
+        // <Paragraph parameter={value}
         return(
             <div>
+                {paragraphs}
             <h1>Welcome to my cool website!</h1>
             <p>I hope you like it!</p>
-            <Paragraph/>
+            <CountButton buttonClick={buttonClick} count={count} />
+            <Paragraph paragraphName={"Favourite Paragraph"}/>
             {paragraphs}
+            <CountButton buttonClick={buttonClick} count={count} />
             </div>
         );
     }
-
-    function Paragraph() {
+    // Paragraph({ destructuredParameter1, destructuredParameter2 })
+    function Paragraph({paragraphName}) {
         return(
-            <p>This is a paragraph!</p>
+            <p>This is a paragraph! It's name is: {paragraphName}</p>
         );
+    }
+
+    function CountButton({count, buttonClick}) {
+        return(
+            <button onClick={buttonClick}>This button has been clicked {count} times</button>
+        )
     }
 
     // root of virtual dom
     const root = createRoot(document.getElementById("root"));
     root.render(
         <div>
-        <Paragraph/>
+        <Paragraph paragraphName={"Favourite Paragraph"}/>
         <App/>
         </div>
     );
