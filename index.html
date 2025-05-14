@@ -23,6 +23,18 @@
     import { createRoot } from 'react-dom/client'
 
     function App() {
+        /*
+        Exercise
+            Create an Image component
+            This will display an image
+            Create a ChangeImage button
+            Everytime this button is clicked, it will disply the next image
+            The images will cycle through 3 predetermined images before starting over
+
+
+        */
+
+
         // const [varName, changeFunction] = useState(initialValue);
         const [count, setCount] = useState(0);
         // const example = useState("a");
@@ -55,6 +67,8 @@
             {song: "Hello", artist: "Adelle", rating: 3},
             {song: "Never Gonna Give You Up", artist: "Rick Astley", rating: 5},
         ];
+
+        let Music;
 
         const MusicComponents = [];
         MusicDataArray.forEach(Music => {
