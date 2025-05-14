@@ -30,16 +30,36 @@
         // console.log(example[0]);
         // console.log(example[1]);
 
+        
+
         function buttonClick() {
+            function incrementCount(count) {
+                return count+1
+            }
             //count++
             // count = count + 1
-            setCount(count+1);
+            setCount(incrementCount);
+            // setCount(incrementCount);
+            // setCount(count+1);
+            // setCount(count => count+1);
+            // setCount(count => count+1);
         }
 
         const paragraphs = [];
         for (let i=0; i<10; i++) {
             paragraphs.push(<Paragraph key={i} paragraphName={i}/>);
         }
+
+        const MusicDataArray = [
+            {song: "test", artist: "test", rating: 1},
+            {song: "Hello", artist: "Adelle", rating: 3},
+            {song: "Never Gonna Give You Up", artist: "Rick Astley", rating: 5},
+        ];
+
+        const MusicComponents = [];
+        MusicDataArray.forEach(Music => {
+            MusicComponents.push(<MusicData Music={Music}/>);
+        });
         // can only return one html element at a time
         // that element can have as many children as you want
         // <Paragraph parameter={value}
@@ -50,6 +70,7 @@
             <p>I hope you like it!</p>
             <CountButton buttonClick={buttonClick} count={count} />
             <Paragraph paragraphName={"Favourite Paragraph"}/>
+            {MusicComponents}
             {paragraphs}
             <CountButton buttonClick={buttonClick} count={count} />
             </div>
@@ -65,6 +86,18 @@
     function CountButton({count, buttonClick}) {
         return(
             <button onClick={buttonClick}>This button has been clicked {count} times</button>
+        )
+    }
+
+    function MusicData({Music}) {
+        return(
+            <article>
+                <ul>
+                    <li>Song: {Music.song}</li>
+                    <li>Artist: {Music.artist}</li>
+                    <li>Rating: {Music.rating}/5</li>
+                </ul>
+            </article>
         )
     }
 
