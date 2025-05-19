@@ -30,7 +30,7 @@
             Create a ChangeImage button
             Everytime this button is clicked, it will disply the next image
             The images will cycle through 3 predetermined images before starting over
-
+        
 
         */
 
@@ -42,6 +42,7 @@
         // console.log(example[0]);
         // console.log(example[1]);
 
+        const [imageIndex, changeImageIndex] = useState(0);
         
 
         function buttonClick() {
@@ -55,6 +56,11 @@
             // setCount(count+1);
             // setCount(count => count+1);
             // setCount(count => count+1);
+        }
+
+        // Increments image number and loops to the start at the end
+        function changeImage() {
+            changeImageIndex( (imageIndex+1)%imageDataArray.length );
         }
 
         const paragraphs = [];
@@ -77,12 +83,21 @@
         // can only return one html element at a time
         // that element can have as many children as you want
         // <Paragraph parameter={value}
+
+
+        const imageDataArray = [
+            {src: "img1.png", alt: "img1"},
+            {src: "img2.png", alt: "img2"},
+            {src: "img3.png", alt: "img3"},
+        ]
         return(
             <div>
                 {paragraphs}
             <h1>Welcome to my cool website!</h1>
             <p>I hope you like it!</p>
             <CountButton buttonClick={buttonClick} count={count} />
+            <Image imageData={imageDataArray[imageIndex]}/>
+            <ChangeImageButton changeImage={changeImage}/>
             <Paragraph paragraphName={"Favourite Paragraph"}/>
             {MusicComponents}
             {paragraphs}
@@ -115,6 +130,18 @@
         )
     }
 
+    function Image({imageData}) {
+        return(
+            <img src={imageData.src} alt={imageData.alt} />
+        )
+    }
+
+    function ChangeImageButton({changeImage}) {
+        return(
+            <button onClick={changeImage}>Change image</button>
+        )
+    }
+    
     // root of virtual dom
     const root = createRoot(document.getElementById("root"));
     root.render(
